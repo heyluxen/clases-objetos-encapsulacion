@@ -117,6 +117,47 @@ print(f"{f.dia}/{f.mes}/{f.año}")
 
 - Fecha.desde_texto("25-12-2023") es un método de clase que parsea el texto y crea una instancia. print muestra 25/12/2023.
 
+## 3. metodos.py
+**Propósito:**
+Mostrar métodos de instancia, estáticos y de clase, incluyendo métodos que llaman a otros métodos.
+
+**Código:**
+
+```python
+class Calculadora:
+    @staticmethod
+    def es_par(n):
+        return n % 2 == 0
+
+    @classmethod
+    def descripcion(cls):
+        return f"Clase {cls.__name__}"
+
+    def __init__(self, valor):
+        self.valor = valor
+
+    def doble(self):
+        return self.valor * 2
+
+print(Calculadora.es_par(10))
+print(Calculadora.descripcion())
+calc = Calculadora(5)
+print(calc.doble())
+```
+
+## Salida esperada:
+![Salida metodos](images/salida4.png)
+
+### Explicación:
+
+- Calculadora.es_par(10) es un método estático. No necesita instancia y devuelve True porque 10 es par.
+
+- Calculadora.descripcion() es un método de clase. Recibe cls y devuelve el nombre de la clase: "Clase Calculadora".
+
+- calc = Calculadora(5) crea una instancia. calc.doble() multiplica el atributo valor (5) por 2, dando 10.
+
+---
+
 ## 4. atributos.py
 **Propósito:**
 Diferenciar entre atributos de instancia y de clase, mostrar atributos dinámicos y especiales.
@@ -158,45 +199,6 @@ print(e1.__dict__)
 - A juan se le asigna dinámicamente el atributo profesion, por eso se imprime "Ingeniero".
 
 - e1.__dict__ muestra los atributos de instancia de e1: {'nombre': 'María', 'edad': 20}. El atributo de clase no aparece aquí.
-
-## 3. metodos.py
-**Propósito:**
-Mostrar métodos de instancia, estáticos y de clase, incluyendo métodos que llaman a otros métodos.
-
-**Código:**
-
-```python
-class Calculadora:
-    @staticmethod
-    def es_par(n):
-        return n % 2 == 0
-
-    @classmethod
-    def descripcion(cls):
-        return f"Clase {cls.__name__}"
-
-    def __init__(self, valor):
-        self.valor = valor
-
-    def doble(self):
-        return self.valor * 2
-
-print(Calculadora.es_par(10))
-print(Calculadora.descripcion())
-calc = Calculadora(5)
-print(calc.doble())
-```
-
-## Salida esperada:
-![Salida metodos](images/salida4.png)
-
-### Explicación:
-
-- Calculadora.es_par(10) es un método estático. No necesita instancia y devuelve True porque 10 es par.
-
-- Calculadora.descripcion() es un método de clase. Recibe cls y devuelve el nombre de la clase: "Clase Calculadora".
-
-- calc = Calculadora(5) crea una instancia. calc.doble() multiplica el atributo valor (5) por 2, dando 10.
 
 ---
 
