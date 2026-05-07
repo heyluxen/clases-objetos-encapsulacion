@@ -1,3 +1,22 @@
+**Aprendiz:** Valentina Correa Hoyos.
+# Proyecto: Fundamentos de POO en Python – Clases, Objetos y Encapsulación
+
+Este repositorio contiene el desarrollo completo de la actividad, que abarca la replicación de ejemplos del material didáctico, la implementación de dos talleres prácticos y un reto integrador. El objetivo es demostrar la comprensión y aplicación de los principios de Programación Orientada a Objetos (POO) en Python, incluyendo la definición de clases, encapsulación, métodos, propiedades y el uso de colecciones para gestionar información.
+
+
+## Estructura del proyecto
+
+```markdown
+CLASES_OBJETOS_ENCAPSULACION/
+│
+├── concepto_de_objetos/ # Ejemplos: clase, objeto, constructor, atributos, métodos
+├── encapsulacion/ # Ejemplos: atributos privados, getters/setters, propiedades, métodos privados
+├── taller_clases_objetos/ # Taller: clase Libro
+├── taller_encapsulacion/ # Taller: clase CuentaBancaria
+├── reto_sistema_prestamos/ # Reto integrador: Sistema de Préstamos de Equipos
+├── images/ # Capturas de pantalla de las salidas
+└── README.md
+```
 # Ejemplos replicados – Concepto de clase y objeto
 
 Esta carpeta contiene la implementación práctica de los conceptos teóricos sobre **clases, objetos, constructor, atributos y métodos** vistos en el material de formación.
@@ -540,3 +559,250 @@ print("Nuevo salario total:", e.salario_total)
 - c.radio es propiedad con setter; c.area y c.perimetro son solo lectura. Al cambiar radio de 5 a 10, el área se actualiza automáticamente.
 
 - Empleado.salario_total es propiedad calculada: 2000 + (horas_extra × tarifa_extra). Al cambiar horas_extra de 10 a 15, el salario total pasa de 2150 a 2225.
+
+
+
+# Taller de Clases y Objetos – Clase Libro
+
+Este proyecto implementa una clase `Libro` que representa un libro en una biblioteca, con atributos y métodos para gestionar préstamos y devoluciones.
+
+## Archivo incluido
+
+- `libro.py` – Definición de la clase `Libro` y su demostración en `main()`.
+
+---
+
+## Propósito
+
+Aplicar los fundamentos de programación orientada a objetos: definir una clase, crear objetos, usar el constructor `__init__` y métodos de instancia (`prestar`, `devolver`, `informacion`).
+
+---
+
+**Código:**
+
+```python
+class Libro:
+    def __init__(self, titulo, autor, paginas, disponible=True):
+        """
+        Constructor de la clase Libro
+        
+        Args:
+            titulo (str): Título del libro
+            autor (str): Autor del libro
+            paginas (int): Número total de páginas
+            disponible (bool): Estado de disponibilidad (True = disponible)
+        """
+        self.titulo = titulo
+        self.autor = autor
+        self.paginas = paginas
+        self.disponible = disponible
+
+    def prestar(self):
+        """Cambia el estado a prestado si está disponible."""
+        if self.disponible:
+            self.disponible = False
+            return f"✅ El libro '{self.titulo}' ha sido prestado."
+        else:
+            return f"❌ El libro '{self.titulo}' NO está disponible para préstamo."
+
+    def devolver(self):
+        """Cambia el estado a disponible si estaba prestado."""
+        if not self.disponible:
+            self.disponible = True
+            return f"📚 El libro '{self.titulo}' ha sido devuelto."
+        else:
+            return f"ℹ️ El libro '{self.titulo}' ya estaba disponible en la biblioteca."
+
+    def informacion(self):
+        """Devuelve una cadena con toda la información del libro."""
+        estado = "Disponible" if self.disponible else "Prestado"
+        return f"📖 {self.titulo} | Autor: {self.autor} | Páginas: {self.paginas} | Estado: {estado}"
+
+# Prueba de la clase Libro
+def main():
+    # Crear dos objetos libro diferentes
+    libro1 = Libro("Don Quijote de la Mancha", "Miguel de Cervantes", 863)
+    libro2 = Libro("Cien años de soledad", "Gabriel García Márquez", 471)
+
+    # Mostrar información inicial de los libros
+    print("=== Información inicial de los libros ===")
+    print(libro1.informacion())
+    print()
+    print(libro2.informacion())
+    print()
+
+    # Prestar los libros
+    print("=== Préstamo de libros ===")
+    print(libro1.prestar())
+    print(libro2.prestar())
+    print()
+
+    # Intentar prestar un libro ya prestado
+    print("=== Intento de préstamo de libros ya prestados ===")
+    print(libro1.prestar())
+    print()
+
+    # Mostrar información después del préstamo
+    print("=== Información después del préstamo ===")
+    print(libro1.informacion())
+    print()
+
+    # Devolver un libro
+    print("=== Devolución de libros ===")
+    print(libro1.devolver())
+    print()
+
+    # Intentar devolver un libro ya disponible
+    print("=== Intento de devolución de libros ya disponibles ===")
+    print(libro1.devolver())
+    print()
+
+    # Mostrar información final
+    print("=== Información final de los libros ===")
+    print(libro1.informacion())
+    print()
+    print(libro2.informacion())
+
+if __name__ == "__main__":
+    main()
+```
+
+## Salida:
+![Salida Taller 2](images/salidaTaller1.png)
+
+### Explicación
+
+- Se crean dos libros, inicialmente disponibles.
+
+- prestar() cambia el estado a False y muestra mensaje. Si ya está prestado, avisa.
+
+- devolver() cambia a True si estaba prestado, o avisa si ya estaba disponible.
+
+- informacion() muestra título, autor, páginas y estado actual.
+
+## Reflexión personal
+
+Este taller me permitió practicar la creación de una clase completa con atributos y métodos. Aprendí a controlar el estado interno de los objetos y a devolver mensajes informativos. El reto fue manejar correctamente las condiciones (if/else) para evitar préstamos duplicados o devoluciones incorrectas. La clase Libro es un ejemplo claro de modelado de una entidad del mundo real.
+
+
+# Taller de Encapsulación – Clase CuentaBancaria
+
+Este proyecto implementa una clase `CuentaBancaria` que aplica encapsulación usando atributos privados, propiedades (solo lectura y con validación) y métodos controlados (`depositar`, `retirar`).
+
+## Archivo incluido
+
+- `cuenta_bancaria.py` – Definición de la clase `CuentaBancaria` y su programa de prueba.
+
+---
+
+## Propósito
+
+Aplicar encapsulación en Python: atributos privados (`_titular`, `_saldo`), propiedades (`@property` y `@setter`), métodos que modifican el estado interno con validaciones, y manejo de excepciones.
+
+---
+
+## Código completo
+
+```python
+class CuentaBancaria:
+    def __init__(self, titular, saldo_inicial=0.0):
+        self._titular = titular
+        self._saldo = saldo_inicial
+
+    @property
+    def titular(self):
+        return self._titular
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @saldo.setter
+    def saldo(self, nuevo_saldo):
+        if nuevo_saldo < 0:
+            raise ValueError("El saldo no puede ser negativo")
+        self._saldo = nuevo_saldo
+
+    def depositar(self, cantidad):
+        if cantidad > 0:
+            self._saldo += cantidad
+            return True
+        return False
+
+    def retirar(self, cantidad):
+        if 0 < cantidad <= self._saldo:
+            self._saldo -= cantidad
+            return True
+        return False
+
+# Prueba
+if __name__ == "__main__":
+    cuenta = CuentaBancaria("Ana Pérez", 1000.0)
+    print(f"Titular: {cuenta.titular}")
+    print(f"Saldo inicial: {cuenta.saldo}")
+
+    if cuenta.depositar(500):
+        print(f"Depósito exitoso. Nuevo saldo: {cuenta.saldo}")
+    else:
+        print("Depósito no válido")
+
+    if cuenta.retirar(200):
+        print(f"Retiro exitoso. Nuevo saldo: {cuenta.saldo}")
+    else:
+        print("Retiro no válido")
+
+    try:
+        cuenta.saldo = -100
+    except ValueError as e:
+        print(f"Error: {e}")
+```
+
+## Salida:
+![Salida Taller 2](images/salidaTaller2.png)
+
+### Explicación:
+
+- titular es propiedad de solo lectura (no tiene setter), por eso se puede leer pero no modificar.
+
+- saldo tiene setter que lanza ValueError si se intenta asignar un valor negativo.
+
+- depositar() solo acepta cantidades positivas; devuelve True si se realizó.
+
+- retirar() solo permite retirar si hay saldo suficiente y la cantidad es positiva; devuelve True si se realizó.
+
+- El programa de prueba muestra el uso correcto y el manejo de la excepción al intentar saldo negativo.
+
+## Reflexión personal
+
+Este taller me permitió practicar la encapsulación real en Python. Aprendí a usar propiedades con @property para controlar el acceso a atributos, hacer que algunos sean solo lectura, y validar datos antes de asignarlos. El método depositar y retirar son ejemplos de operaciones seguras que mantienen la integridad del objeto. El mayor reto fue entender la diferencia entre atributos privados por convención (_saldo) y propiedades con setter, pero ahora lo domino. La clase CuentaBancaria es un modelo clásico de cómo proteger datos sensibles.
+
+
+# Reto Integrador: Sistema de Préstamos de Equipos
+
+Aplicación en Python que gestiona el inventario, préstamos y devoluciones de equipos de cómputo mediante POO, encapsulación y colecciones.
+
+## Lógica aplicada
+
+- **Clases principales**: `Equipo`, `Usuario`, `SistemaPrestamos`.  
+- **Encapsulación**: Atributos privados (`__nombre`, `__disponible`, `__historial`) con propiedades de solo lectura.  
+- **Métodos**: `prestar()`, `devolver()`, `agregar_equipo()`, `registrar_prestamo()`, `ver_historial()`.  
+- **Colecciones**:  
+  - Diccionario `__equipos` (nombre → objeto `Equipo`).  
+  - Lista `__historial` dentro de cada equipo para almacenar tuplas `(usuario, fecha)`.  
+- **Menú interactivo**: Opciones para ver equipos, registrar préstamos, devolver, historial, agregar equipos y salir.
+
+## Ejemplo de ejecución
+
+![Ejemplo de funcionamiento](images/salida1reto.png)
+
+![Ejemplo de funcionamiento](images/salida2reto.png)
+
+![Ejemplo de funcionamiento](images/salida3reto.png)
+
+![Ejemplo de funcionamiento](images/salida4reto.png)
+
+![Ejemplo de funcionamiento](images/salida5reto.png)
+
+## Reflexión personal
+
+Este reto me permitió integrar todos los conceptos de POO: clases, encapsulación (atributos privados, propiedades), métodos y colecciones. Aprendí a proteger la información de disponibilidad y préstamos, a usar diccionarios para acceso rápido a equipos, listas para historiales y tuplas para garantizar inmutabilidad de cada registro. El mayor desafío fue diseñar la interacción entre clases y asegurar que el menú fuera robusto. Al final, obtuve un sistema funcional similar a los usados en bibliotecas o laboratorios, demostrando la utilidad de la POO en problemas reales.
