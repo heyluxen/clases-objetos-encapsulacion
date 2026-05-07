@@ -117,7 +117,7 @@ print(f"{f.dia}/{f.mes}/{f.año}")
 
 - Fecha.desde_texto("25-12-2023") es un método de clase que parsea el texto y crea una instancia. print muestra 25/12/2023.
 
-## 3. atributos.py
+## 4. atributos.py
 **Propósito:**
 Diferenciar entre atributos de instancia y de clase, mostrar atributos dinámicos y especiales.
 
@@ -159,7 +159,7 @@ print(e1.__dict__)
 
 - e1.__dict__ muestra los atributos de instancia de e1: {'nombre': 'María', 'edad': 20}. El atributo de clase no aparece aquí.
 
-## 4. metodos.py
+## 3. metodos.py
 **Propósito:**
 Mostrar métodos de instancia, estáticos y de clase, incluyendo métodos que llaman a otros métodos.
 
